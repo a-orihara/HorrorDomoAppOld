@@ -74,21 +74,21 @@ services:
   #     - api
   #     - front
 
-  # front:
-  #   build:
-  #     context: ./front/
-  #     dockerfile: Dockerfile
-  #   image: nextjs-img-dev2
-  #   container_name: nextjs-ctr-dev2
-  #   # 同期する
-  #   volumes:
-  #     - ./frontend/front-app:/usr/src/front-app
-  #   # 作業ディレクトリを[/front-app]に指定しているので、'npm run dev'のみでOK
-  #   command: "npm run dev"
-  #   ports:
-  #     - "3011:3000"
-  #   depends_on:
-  #     - api
+  front:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    image: nextjs-img-dev2
+    container_name: nextjs-ctr-dev2
+    # 同期する
+    volumes:
+      - ./frontend/front-app:/usr/src/front-app
+    # 作業ディレクトリを[/front-app]に指定しているので、'npm run dev'のみでOK
+    command: "npm run dev"
+    ports:
+      - "3011:3000"
+    depends_on:
+      - api
 
 # 記憶領域のマウントを設定(ボリュームマウント)。複数のコンテナ間でボリュームをシェア。
 # ここで定義したvolumeはdocker-compose実行時に自動で作成。このボリュームはホスト側からは独立して永続化。
@@ -97,8 +97,8 @@ volumes:
   tmp-data2:
   log-data2:
   db-data2:
-    # # このボリュームに対して、どのボリューム・ドライバを使うか指定します。
-    # # デフォルトは、Docker Engineで使用するように設定されているドライバであり、多くの場合はlocalです。
+    # このボリュームに対して、どのボリューム・ドライバを使うか指定します。
+    # デフォルトは、Docker Engineで使用するように設定されているドライバであり、多くの場合はlocalです。
     # driver: local
 # @          @@          @@          @@          @@          @@          @@          @
 # 1
