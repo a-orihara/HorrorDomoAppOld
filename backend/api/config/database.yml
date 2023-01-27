@@ -15,10 +15,12 @@ default: &default
   # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   # username: root
   # username: user_dev
-  username: <%= ENV.fetch("MYSQL_USER") { "user_dev" } %>
+  # username: <%= ENV.fetch("MYSQL_USER") { "user_dev" } %>
+  username: <%= ENV.fetch("MYSQL_USER") %>
   # password:
   # password: password_dev
-  password: <%= ENV.fetch("MYSQL_PASSWORD") { "password_dev" } %>
+  # password: <%= ENV.fetch("MYSQL_PASSWORD") { "password_dev" } %>
+    password: <%= ENV.fetch("MYSQL_PASSWORD") %>
   host: db
 
 development:
