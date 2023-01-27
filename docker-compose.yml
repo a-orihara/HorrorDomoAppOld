@@ -16,7 +16,6 @@ services:
     # 4
     environment:
       MYSQL_ROOT_PASSWORD: root_password_dev
-      MYSQL_DATABASE: database_dev
       MYSQL_USER: user_dev
       MYSQL_PASSWORD: password_dev
       TZ: Asia/Tokyo
