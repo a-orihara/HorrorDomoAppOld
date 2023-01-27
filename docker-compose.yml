@@ -16,7 +16,6 @@ services:
     # 4
     environment:
       MYSQL_ROOT_PASSWORD: root_password_dev
-      MYSQL_DATABASE: database_dev
       MYSQL_USER: user_dev
       MYSQL_PASSWORD: password_dev
       TZ: Asia/Tokyo
@@ -34,14 +33,12 @@ services:
     # imageはその構成に使われる(imageによるプルは発生しない).結果image名を設定する事になる。
     image: rails-img-dev2
     container_name: rails-ctr-dev2
-    env_file:
-      - ./backend/api/.env
     # 8
     volumes:
       - ./backend/api:/api-app
-      - public-data:/api-app/public
-      - tmp-data:/api-app/tmp
-      - log-data:/api-app/log
+      - public-data2:/api-app/public
+      - tmp-data2:/api-app/tmp
+      - log-data2:/api-app/log
     # 5 rails s:puma(アプリケーションサーバ)が起動。
     # ↓nginxなしの場合。コンテナ（ホストではない）が3000番ポートで待ち受けるの意味。
     command: bash -c "rm -f tmp/pids/server.pid && rails s -p 3000 -b '0.0.0.0'"
@@ -55,6 +52,8 @@ services:
     stdin_open: true
     # -itのt=tty
     tty: true
+    # -itは-i, --interactiveと-t, --ttyの組み合わせで、疑似ターミナルの割り当てを行い標準入出力を行えるよう
+    # にするためのコマンドです。
 
   # web:
   #   build:
@@ -94,10 +93,10 @@ services:
 # 記憶領域のマウントを設定(ボリュームマウント)。複数のコンテナ間でボリュームをシェア。
 # ここで定義したvolumeはdocker-compose実行時に自動で作成。このボリュームはホスト側からは独立して永続化。
 volumes:
-  public-data:
-  tmp-data:
-  log-data:
-  db-data:
+  public-data2:
+  tmp-data2:
+  log-data2:
+  db-data2:
     # # このボリュームに対して、どのボリューム・ドライバを使うか指定します。
     # # デフォルトは、Docker Engineで使用するように設定されているドライバであり、多くの場合はlocalです。
     # driver: local
